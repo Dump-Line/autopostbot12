@@ -10,6 +10,8 @@ from flask import Flask, request
 import os
 import sys
 
+
+HEROKU_LINK = "https://autopost12.herokuapp.com/"
 TOKEN = config.token
 bot = telebot.TeleBot(config.token)
 server = Flask(__name__)
