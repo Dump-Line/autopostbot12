@@ -6,9 +6,13 @@ import time
 from datetime import datetime, timedelta
 from text import *
 import threading
+from flask import Flask, request
+import os
+import sys
 
 TOKEN = config.token
 bot = telebot.TeleBot(config.token)
+server = Flask(__name__)
 
 
 
