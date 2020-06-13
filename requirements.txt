@@ -1,1 +1,5 @@
-pyTelegramBotAPI==3.6.6
+pytelegrambotapi
+datetime
+psycopg2
+psycopg2-binary
+flask
