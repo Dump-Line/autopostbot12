@@ -7,7 +7,7 @@ DATABASE = DATABASE = {'dbname':"dfmirrdfr3rn0s",
 }
 
 class Sqlopen:
-	def __init__(self, base):
+	def __init__(self):
 		self.connection = psycopg2.connect(
 				dbname=DATABASE["dbname"],
 				user=DATABASE["user"],

@@ -56,7 +56,7 @@ def create_inlineKeyboard(key,row=0):
 @bot.message_handler(commands=['panel'])
 def check_status(message):
 	check_list = []	
-	for i in base.Sqlopen('sender.db').returner('admins'):
+	for i in base.Sqlopen().returner('admins'):
 		check_list.append(list(i)[0])
 	if str(message.from_user.id) != admin_id:
 		return ''
@@ -77,14 +77,8 @@ def add_chanell(call):
 	bot.register_next_step_handler(call.message, confirm_chanell)
 
 def confirm_chanell(message):    
-	base.Sqlopen('sender.db').add_chanell('chanel', message.text)
+	base.Sqlopen().add_chanell('chanel', message.text)
 	bot.send_message(message.chat.id, 'Канал успешно добавлен', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
-
-
-
-
-
-
 
 
 #################################################################################
@@ -96,7 +90,7 @@ def add_text(call):
 	bot.register_next_step_handler(call.message, confirm_add_text)
 
 def confirm_add_text(message): 
-	base.Sqlopen('sender.db').add_data('data', message.text)
+	base.Sqlopen().add_data('data', message.text)
 	bot.send_message(message.chat.id, 'Сообщение успешно добавлено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
 
@@ -110,8 +104,8 @@ def confirm_add_text(message):
 def del_text(call):
 	count = 1
 	answer = ''
-	if len(base.Sqlopen('sender.db').returner('data')) != 0:
-		for i in base.Sqlopen('sender.db').returner('data'):
+	if len(base.Sqlopen().returner('data')) != 0:
+		for i in base.Sqlopen().returner('data'):
 			answer += f'{str(count)}.{str(i[0])} \n'
 			count += 1
 		answer += 'Введите номер сообщения которое нужно удалить'
@@ -121,7 +115,7 @@ def del_text(call):
 		bot.send_message(call.message.chat.id, "Список пуст", reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
 def confirm_del_text(message): 
-	base.Sqlopen('sender.db').deleter('data', 'message', base.Sqlopen('sender.db').returner('data')[int(message.text) - 1][0])
+	base.Sqlopen().deleter('data', 'message', base.Sqlopen().returner('data')[int(message.text) - 1][0])
 	bot.send_message(message.chat.id, 'Сообщение успешно удалено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
 ######################################################################################
@@ -132,8 +126,8 @@ def confirm_del_text(message):
 def del_link(call):
 	count = 1
 	answer = ''
-	if len(base.Sqlopen('sender.db').returner('chanel')) != 0:
-		for i in base.Sqlopen('sender.db').returner('chanel'):
+	if len(base.Sqlopen().returner('chanel')) != 0:
+		for i in base.Sqlopen().returner('chanel'):
 			answer += f'{str(count)}.{str(i[0])} \n'
 			count += 1
 		answer += 'Введите номер сообщения которое нужно удалить'
@@ -142,7 +136,7 @@ def del_link(call):
 	else:
 		bot.send_message(call.message.chat.id, "Список пуст", reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))		
 def confirm_del_link(message): 
-	base.Sqlopen('sender.db').deleter('chanel', 'chanels_id', base.Sqlopen('sender.db').returner('chanel')[int(message.text) - 1][0])
+	base.Sqlopen().deleter('chanel', 'chanels_id', base.Sqlopen().returner('chanel')[int(message.text) - 1][0])
 	bot.send_message(message.chat.id, 'Сообщение успешно удалено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
 
@@ -161,8 +155,8 @@ def cancel(call):
 
 def send():
 	while 1:
-		for i in base.Sqlopen('sender.db').returner('chanel'):
-			for x in base.Sqlopen('sender.db').returner('data'):
+		for i in base.Sqlopen().returner('chanel'):
+			for x in base.Sqlopen().returner('data'):
 				message = "Заказы Аврора:" + '\n' + x[0] + '\n' + f'По заказам писать  - Такси Аврора {url}'
 				bot.send_message(i[0], message)
 		time.sleep(sleep_time)
