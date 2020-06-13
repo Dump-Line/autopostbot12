@@ -16,16 +16,13 @@ class Sqlopen:
 				port=DATABASE["port"])
 		self.cursor = self.connection.cursor()
 
-	
-	def create_table(self, table):
-		self.cursor.execute(f'CREATE TABLE "{str(table)}" (Subject Text, Numbers Text)')
 
-		self.connection.commit()
 	def add_data(self, table, text):
 		self.cursor.execute(f'INSERT INTO "{str(table)}" VALUES ({str(text)})')
 		self.connection.commit()	
 	def add_chanell(self, table, chanell):
-		self.cursor.execute(f'INSERT INTO "{str(table)}" VALUES ({str(chanell)})')
+		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ({str(chanell)})')
+		self.connection.commit()
 	
 		self.connection.commit()
 	def returner(self, data):
