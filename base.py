@@ -22,10 +22,10 @@ class Sqlopen:
 
 		self.connection.commit()
 	def add_data(self, table, text):
-		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ("{str(text)}")')
+		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ({str(text)})')
 		self.connection.commit()	
 	def add_chanell(self, table, chanell):
-		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ("{str(chanell)}")')
+		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ({str(chanell)})')
 	
 		self.connection.commit()
 	def returner(self, data):
