@@ -10,6 +10,8 @@ from flask import Flask, request
 import os
 import sys
 
+global crutch
+crutch = False
 
 HEROKU_LINK = "https://autopost12.herokuapp.com/"
 TOKEN = config.token
@@ -161,7 +163,6 @@ def cancel(call):
 																																					 row = 2))
 
 def send():
-	global crutch
 	print(crutch)
 	while 1:
 		message_dict = {}
@@ -171,6 +172,7 @@ def send():
 				message_dict[r.message_id] = r.chat.id
 				time.sleep(1.6)
 		for i in range(sleep_time):
+			global crutch
 			if crutch:
 				crutch = False
 				break
