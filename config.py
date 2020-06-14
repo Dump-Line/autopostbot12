@@ -1,1 +1,1 @@
-token = '799063341:AAFnRQu4jYp1mwukGJaMAOnEyEz5Nt3DJAA' # Ваш токен
+token = '951539767:AAEGxCmJWX9Wo60MF9hYiupT6KucXQx6pKc' # Ваш токен
