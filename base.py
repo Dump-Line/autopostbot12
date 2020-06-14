@@ -26,11 +26,11 @@ class Sqlopen:
 	
 		self.connection.commit()
 	def returner(self, data):
-		self.cursor.execute(f'SELECT * FROM "{str(data)}"')
+		self.cursor.execute(f'SELECT * FROM {str(data)}')
 		return self.cursor.fetchall()
 
 	def deleter(self, data, category, info):
-		self.cursor.execute(f"DELETE FROM '{str(data)}' WHERE {str(category)} = '{str(info)}'")
+		self.cursor.execute(f"DELETE FROM {str(data)} WHERE {str(category)} = {str(info)}")
 		self.connection.commit()
 
 
