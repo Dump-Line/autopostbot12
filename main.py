@@ -77,6 +77,10 @@ def add_chanell(call):
 	bot.register_next_step_handler(call.message, confirm_chanell)
 
 def confirm_chanell(message):    
+	for i in base.Sqlopen().returner('data'):
+		if message.text == i[0]:
+			bot.send_message(message.chat.id, 'Канал уже в списке', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
+			return ''
 	base.Sqlopen().add_chanell('chanel', message.text)
 	bot.send_message(message.chat.id, 'Канал успешно добавлен', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 

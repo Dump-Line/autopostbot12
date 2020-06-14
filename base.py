@@ -18,7 +18,7 @@ class Sqlopen:
 
 
 	def add_data(self, table, text):
-		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ({str(text)})')
+		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ("{str(text)}")')
 		self.connection.commit()	
 	def add_chanell(self, table, chanell):
 		self.cursor.execute(f'INSERT INTO {str(table)} VALUES ({str(chanell)})')
@@ -30,7 +30,7 @@ class Sqlopen:
 		return self.cursor.fetchall()
 
 	def deleter(self, data, category, info):
-		self.cursor.execute(f"DELETE FROM {str(data)} WHERE {str(category)} = {str(info)}")
+		self.cursor.execute(f"DELETE FROM {str(data)} WHERE {str(category)} = '{str(info)}'")
 		self.connection.commit()
 
 
