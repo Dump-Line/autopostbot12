@@ -163,7 +163,6 @@ def cancel(call):
 																																					 row = 2))
 
 def send():
-	print(crutch)
 	while 1:
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
@@ -172,7 +171,7 @@ def send():
 				message_dict[r.message_id] = r.chat.id
 				time.sleep(1.6)
 		for i in range(sleep_time):
-			global crutch
+			#global crutch
 			if crutch:
 				crutch = False
 				break
