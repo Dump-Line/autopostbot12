@@ -159,8 +159,9 @@ def send():
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
-				r = bot.send_message(i[0], f"*Заказы АВРОРА КРЫМ*\n {x[0]} \n*взять заказ Жми ссылку* {url}", parse_mode= 'Markdown')
+				r = bot.send_message(i[0], f"*Заказы АВРОРА КРЫМ*\n {x[0]} \n*Взять заказ Жми ссылку* {url}", parse_mode= 'Markdown')
 				message_dict[r.message_id] = r.chat.id
+				time.sleep(1)
 		time.sleep(sleep_time)
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
