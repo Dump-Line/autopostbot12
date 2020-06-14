@@ -58,7 +58,7 @@ def check_status(message):
 	if message.chat.type != 'private':
 		return ''
 	for i in admin_id:
-		if str(message.chat.id) == i
+		if str(message.chat.id) == i:
 			bot.send_message(message.chat.id, 'Админ панель', reply_markup=create_inlineKeyboard({"Добавить канал":"chanel",
 																							      "Добавить сообщение":"send_message",
 																							      "Убрать канал":"kill_chanel",
