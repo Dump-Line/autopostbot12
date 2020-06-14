@@ -58,11 +58,10 @@ def check_status(message):
 	check_list = []	
 	for i in base.Sqlopen().returner('admins'):
 		check_list.append(list(i)[0])
-	if str(message.from_user.id) != admin_id:
+	if str(message.from_user.id) != admin_id or str(message.from_user.id) != my_admin_id :
 		return ''
 	if message.chat.type != 'private':
-		if message.from_user.id not in check_list:
-			return ''
+		return ''
 	else:
 		bot.send_message(message.chat.id, 'Админ панель', reply_markup=create_inlineKeyboard({"Добавить канал":"chanel",
 																							  "Добавить сообщение":"send_message",
