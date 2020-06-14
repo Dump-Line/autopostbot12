@@ -55,9 +55,11 @@ def create_inlineKeyboard(key,row=0):
 
 @bot.message_handler(commands=['panel'])
 def check_status(message):
-	if message.chat.type != 'private':
-		return ''
+#	if message.chat.type != 'private':
+#		return ''
 	for i in admin_id:
+		print(i)
+		print(message.chat.id)
 		if str(message.chat.id) == i:
 			bot.send_message(message.chat.id, 'Админ панель', reply_markup=create_inlineKeyboard({"Добавить канал":"chanel",
 																							      "Добавить сообщение":"send_message",
