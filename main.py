@@ -160,7 +160,7 @@ def send():
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
 				message = "Заказы АВРОРА КРЫМ" + '\n' + x[0] + '\n' + f'взять заказ Жми ссылку {url}'
-				r = bot.send_message(i[0], f'*{message}*', parse_mode= 'Markdown')
+				r = bot.send_message(i[0], message)
 				message_dict[r.message_id] = r.chat.id
 		time.sleep(sleep_time)
 		for i in message_dict.items():
