@@ -170,13 +170,13 @@ def send():
 				r = bot.send_message(i[0], f"*Заказы АВРОРА КРЫМ*\n {x[0]} \n*Взять заказ Жми ссылку* {url}", parse_mode= 'Markdown')
 				message_dict[r.message_id] = r.chat.id
 				time.sleep(1.6)
-		for i in range(sleep_time):
-			#global crutch
-			#if crutch == True:
-			#	crutch = False
-			#	break
-			#else:
-			time.sleep(1)
+		for i in range(sleep_time/5):
+			global crutch
+			if crutch == True:
+				crutch = False
+				break
+			else:
+				time.sleep(5)
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
 			time.sleep(2)
