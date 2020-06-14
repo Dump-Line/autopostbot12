@@ -179,7 +179,8 @@ def send():
 				time.sleep(1)
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
-			time.sleep(8)
+			time.sleep(2)
+		time.sleep(5)	
 rT = threading.Thread(target = send)
 rT.start()
 
