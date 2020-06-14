@@ -78,6 +78,8 @@ def confirm_chanell(message):
 		if message.text == i[0]:
 			bot.send_message(message.chat.id, 'Канал уже в списке', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 			return ''
+	global crutch
+	crutch = True
 	base.Sqlopen().add_chanell('chanel', message.text)
 	bot.send_message(message.chat.id, 'Канал успешно добавлен', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
@@ -91,6 +93,8 @@ def add_text(call):
 	bot.register_next_step_handler(call.message, confirm_add_text)
 
 def confirm_add_text(message): 
+	global crutch
+	crutch = True
 	base.Sqlopen().add_data('data', message.text)
 	bot.send_message(message.chat.id, 'Сообщение успешно добавлено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
@@ -116,6 +120,8 @@ def del_text(call):
 		bot.send_message(call.message.chat.id, "Список пуст", reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
 def confirm_del_text(message): 
+	global crutch
+	crutch = True
 	base.Sqlopen().deleter('data', 'message', base.Sqlopen().returner('data')[int(message.text) - 1][0])
 	bot.send_message(message.chat.id, 'Сообщение успешно удалено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
@@ -137,6 +143,8 @@ def del_link(call):
 	else:
 		bot.send_message(call.message.chat.id, "Список пуст", reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))		
 def confirm_del_link(message): 
+	global crutch
+	crutch = True
 	base.Sqlopen().deleter('chanel', 'chanels_id', base.Sqlopen().returner('chanel')[int(message.text) - 1][0])
 	bot.send_message(message.chat.id, 'Сообщение успешно удалено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
@@ -155,14 +163,19 @@ def cancel(call):
 																																					 row = 2))
 
 def send():
+	global crutch
 	while 1:
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
 				r = bot.send_message(i[0], f"*Заказы АВРОРА КРЫМ*\n {x[0]} \n*Взять заказ Жми ссылку* {url}", parse_mode= 'Markdown')
 				message_dict[r.message_id] = r.chat.id
-				time.sleep(1)
-		time.sleep(sleep_time)
+				time.sleep(1.6)
+		for i in range(sleep_time):
+			if crutch:
+				crutch = False
+				break
+			time.sleep(1)
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
 			time.sleep(8)
