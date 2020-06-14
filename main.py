@@ -156,12 +156,16 @@ def cancel(call):
 
 def send():
 	while 1:
+		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
-				message = "Заказы Аврора:" + '\n' + x[0] + '\n' + f'По заказам писать  - Такси Аврора {url}'
-				bot.send_message(i[0], message)
+				message = "Заказы АВРОРА КРЫМ" + '\n' + x[0] + '\n' + f'взять заказ Жми ссылку {url}'
+				r = bot.send_message(i[0], message)
+				message_dict[r.message_id] = r.chat.id
 		time.sleep(sleep_time)
-
+		for i in message_dict.items():
+			bot.delete_message(i[1], i[0])
+			time.sleep(8)
 rT = threading.Thread(target = send)
 rT.start()
 
