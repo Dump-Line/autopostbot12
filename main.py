@@ -16,8 +16,6 @@ TOKEN = config.token
 bot = telebot.TeleBot(config.token)
 server = Flask(__name__)
 
-
-
 def split_list(arr, wanted_parts=1):
      arrs = []
      while len(arr) > wanted_parts:
@@ -164,6 +162,7 @@ def cancel(call):
 
 def send():
 	global crutch
+	print(crutch)
 	while 1:
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
