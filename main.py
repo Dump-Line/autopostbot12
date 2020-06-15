@@ -173,10 +173,10 @@ def send():
 		for i in range(sleep_time):
 			global crutch
 			if crutch == True:
-				crutch = False
 				break
 			else:
 				time.sleep(1)
+			crutch = False
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
 			time.sleep(8)
