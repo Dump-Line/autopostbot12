@@ -70,8 +70,9 @@ def check_status(message):
 ################################################################################
 @bot.callback_query_handler(func=lambda call: True and call.data == 'chanel')
 def add_chanell(call):
-	bot.send_message(call.message.chat.id, 'Введите ID каналов в которые нужно переслать сообщение')	
+	bot.send_message(call.message.chat.id, 'Введите ID каналов в которые нужно переслать сообщение', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))	
 	bot.register_next_step_handler(call.message, confirm_chanell)
+
 
 def confirm_chanell(message):    
 	for i in base.Sqlopen().returner('data'):
@@ -91,7 +92,7 @@ def confirm_chanell(message):
 @bot.callback_query_handler(func=lambda call: True and call.data == 'send_message')
 def add_text(call):
 	time.sleep(1)
-	bot.send_message(call.message.chat.id, 'Отправьте сообщение')
+	bot.send_message(call.message.chat.id, 'Отправьте сообщение', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 	bot.register_next_step_handler(call.message, confirm_add_text)
 
 def confirm_add_text(message): 
@@ -117,7 +118,7 @@ def del_text(call):
 			answer += f'{str(count)}.{str(i[0])} \n'
 			count += 1
 		answer += 'Введите номер сообщения которое нужно удалить'
-		bot.send_message(call.message.chat.id, answer)
+		bot.send_message(call.message.chat.id, answer, reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 		bot.register_next_step_handler(call.message, confirm_del_text)
 	else:
 		bot.send_message(call.message.chat.id, "Список пуст", reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
@@ -142,7 +143,7 @@ def del_link(call):
 			answer += f'{str(count)}.{str(i[0])} \n'
 			count += 1
 		answer += 'Введите номер сообщения которое нужно удалить'
-		bot.send_message(call.message.chat.id, answer)
+		bot.send_message(call.message.chat.id, answer, reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 		bot.register_next_step_handler(call.message, confirm_del_link)
 	else:
 		time.sleep(1)
