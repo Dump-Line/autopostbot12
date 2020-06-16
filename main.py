@@ -82,6 +82,7 @@ def confirm_chanell(message):
 	crutch = True
 	base.Sqlopen().add_chanell('chanel', message.text)
 	bot.send_message(message.chat.id, 'Канал успешно добавлен', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
+	time.sleep(1)
 
 
 #################################################################################
@@ -89,10 +90,12 @@ def confirm_chanell(message):
 #################################################################################
 @bot.callback_query_handler(func=lambda call: True and call.data == 'send_message')
 def add_text(call):
+	time.sleep(1)
 	bot.send_message(call.message.chat.id, 'Отправьте сообщение')
 	bot.register_next_step_handler(call.message, confirm_add_text)
 
 def confirm_add_text(message): 
+	time.sleep(2)
 	global crutch
 	crutch = True
 	base.Sqlopen().add_data('data', message.text)
@@ -122,6 +125,7 @@ def del_text(call):
 def confirm_del_text(message): 
 	global crutch
 	crutch = True
+	time.sleep(2)
 	base.Sqlopen().deleter('data', 'message', base.Sqlopen().returner('data')[int(message.text) - 1][0])
 	bot.send_message(message.chat.id, 'Сообщение успешно удалено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
 
@@ -141,8 +145,10 @@ def del_link(call):
 		bot.send_message(call.message.chat.id, answer)
 		bot.register_next_step_handler(call.message, confirm_del_link)
 	else:
+		time.sleep(1)
 		bot.send_message(call.message.chat.id, "Список пуст", reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))		
 def confirm_del_link(message): 
+	time.sleep(2)
 	global crutch
 	crutch = True
 	base.Sqlopen().deleter('chanel', 'chanels_id', base.Sqlopen().returner('chanel')[int(message.text) - 1][0])
@@ -155,6 +161,7 @@ def confirm_del_link(message):
 
 @bot.callback_query_handler(func=lambda call: True and call.data == 'cancel')
 def cancel(call):
+	time.sleep(1)
 	bot.clear_step_handler_by_chat_id(chat_id=call.message.chat.id)
 	bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Админ панель', reply_markup=create_inlineKeyboard({"Добавить канал":"chanel",
 																										  											 "Добавить сообщение":"send_message",
@@ -167,18 +174,15 @@ def send():
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
-				r = bot.send_message(chat_id=i[0], text = f"Заказы АВРОРА КРЫМ\n {x[0]} \nВзять заказ Жми ссылку" + ' ' + '@Elena_Mercedes_Vito')
+				bot.send_message(chat_id=i[0], text = f"Заказы АВРОРА КРЫМ\n{x[0]}\nВзять заказ Жми ссылку @Elena_Mercedes_Vito")
 				message_dict[r.message_id] = r.chat.id
-				time.sleep(1.6)
+				time.sleep(2)
 		for i in range(sleep_time):
 			global crutch
-			print(crutch)
 			if crutch == True:
 				break
 			else:
 				time.sleep(1)
-	#	global crutch
-		crutch = False
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
 			time.sleep(5)
