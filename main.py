@@ -179,6 +179,7 @@ def send():
 				time.sleep(2)
 		for i in range(sleep_time):
 			global crutch
+			print(crutch)
 			if crutch == True:
 				break
 			else:
