@@ -39,12 +39,14 @@ def sender():
 		crutch = False
 		time.sleep(1)
 		for i in message_dict.items():
+			print(i)
 			try:
 				bot.delete_message(i[1], i[0])
 				time.sleep(1)
 			except:
 				bot.send_message(767101864, f'Сообщение не удалилось в {i[1]}')
 				continue
+		time.sleep(2)
 rT = threading.Thread(target = sender)
 rT.start()
 
@@ -88,8 +90,6 @@ def check_status(message):
 	if message.chat.type != 'private':
 		return ''
 	for i in admin_id:
-		print(i)
-		print(message.chat.id)
 		if str(message.chat.id) == i:
 			bot.send_message(message.chat.id, 'Админ панель', reply_markup=create_inlineKeyboard({"Добавить канал":"chanel",
 																							      "Добавить сообщение":"send_message",
