@@ -18,6 +18,28 @@ TOKEN = config.token
 bot = telebot.TeleBot(config.token)
 server = Flask(__name__)
 
+def sender():
+	while 1:
+		message_dict = {}
+		for i in base.Sqlopen().returner('chanel'):
+			for x in base.Sqlopen().returner('data'):
+				r = bot.send_message(chat_id=i[0], text = f"Заказы АВРОРА КРЫМ\n{x[0]}\nВзять заказ Жми ссылку @Elena_Mercedes_Vito")
+				message_dict[r.message_id] = r.chat.id
+				time.sleep(1)
+		for i in range(sleep_time):
+			global crutch
+			if crutch == True:
+				break
+			else:
+				time.sleep(1)
+		crutch = False
+		time.sleep(1)
+		for i in message_dict.items():
+			bot.delete_message(i[1], i[0])
+			time.sleep(1)
+rT = threading.Thread(target = sender)
+rT.start()
+
 def split_list(arr, wanted_parts=1):
      arrs = []
      while len(arr) > wanted_parts:
@@ -170,25 +192,6 @@ def cancel(call):
 																																					 "Убрать сообщение":"kill_message"},
 																																					 row = 2))
 
-def sender():
-	while 1:
-		message_dict = {}
-		for i in base.Sqlopen().returner('chanel'):
-			for x in base.Sqlopen().returner('data'):
-				r = bot.send_message(chat_id=i[0], text = f"Заказы АВРОРА КРЫМ\n{x[0]}\nВзять заказ Жми ссылку @Elena_Mercedes_Vito")
-				message_dict[r.message_id] = r.chat.id
-				time.sleep(1)
-		for i in range(sleep_time):
-			global crutch
-			if crutch == True:
-				break
-			else:
-				time.sleep(1)
-		crutch = False
-		time.sleep(1)
-		for i in message_dict.items():
-			bot.delete_message(i[1], i[0])
-			time.sleep(1)
 
 
 #######################################
@@ -209,6 +212,3 @@ def webhook():
 if __name__ == "__main__":
   server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000))) 
   print("START")
-
-rT = threading.Thread(target = sender)
-rT.start()
