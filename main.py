@@ -170,8 +170,7 @@ def cancel(call):
 																																					 "Убрать сообщение":"kill_message"},
 																																					 row = 2))
 
-def send():
-	print('ready')
+def sender():
 	while 1:
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
@@ -186,11 +185,11 @@ def send():
 			else:
 				time.sleep(1)
 		crutch = False
+		time.sleep(1)
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
 			time.sleep(1)
-rT = threading.Thread(target = send)
-rT.start()
+
 
 #######################################
 @server.route('/' + TOKEN, methods=['POST'])
@@ -210,3 +209,6 @@ def webhook():
 if __name__ == "__main__":
   server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000))) 
   print("START")
+
+rT = threading.Thread(target = sender)
+rT.start()
