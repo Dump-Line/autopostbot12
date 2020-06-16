@@ -19,6 +19,7 @@ bot = telebot.TeleBot(config.token)
 server = Flask(__name__)
 
 def sender():
+	time.sleep(5)
 	while 1:
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
