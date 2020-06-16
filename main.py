@@ -39,8 +39,12 @@ def sender():
 		crutch = False
 		time.sleep(1)
 		for i in message_dict.items():
-			bot.delete_message(i[1], i[0])
-			time.sleep(1)
+			try:
+				bot.delete_message(i[1], i[0])
+				time.sleep(1)
+			except:
+				bot.send_message(767101864, f'Сообщение не удалилось в {i[1]}')
+				continue
 rT = threading.Thread(target = sender)
 rT.start()
 
