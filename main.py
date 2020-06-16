@@ -184,6 +184,8 @@ def send():
 				break
 			else:
 				time.sleep(1)
+		global crutch
+		crutch = False
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
 			time.sleep(5)
