@@ -187,7 +187,7 @@ def send():
 		crutch = False
 		for i in message_dict.items():
 			bot.delete_message(i[1], i[0])
-			time.sleep(5)
+			time.sleep(1)
 rT = threading.Thread(target = send)
 rT.start()
 
