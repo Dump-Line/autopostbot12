@@ -170,16 +170,16 @@ def cancel(call):
 																																					 row = 2))
 
 def send():
+	print('ready')
 	while 1:
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
 				r = bot.send_message(chat_id=i[0], text = f"Заказы АВРОРА КРЫМ\n{x[0]}\nВзять заказ Жми ссылку @Elena_Mercedes_Vito")
 				message_dict[r.message_id] = r.chat.id
-				time.sleep(2)
+				time.sleep(1)
 		for i in range(sleep_time):
 			global crutch
-			print(crutch)
 			if crutch == True:
 				break
 			else:
