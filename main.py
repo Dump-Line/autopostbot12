@@ -95,11 +95,11 @@ def add_text(call):
 	bot.register_next_step_handler(call.message, confirm_add_text)
 
 def confirm_add_text(message): 
-	time.sleep(2)
 	global crutch
 	crutch = True
 	base.Sqlopen().add_data('data', message.text)
 	bot.send_message(message.chat.id, 'Сообщение успешно добавлено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
+	time.sleep(2)
 
 
 
@@ -125,9 +125,9 @@ def del_text(call):
 def confirm_del_text(message): 
 	global crutch
 	crutch = True
-	time.sleep(2)
 	base.Sqlopen().deleter('data', 'message', base.Sqlopen().returner('data')[int(message.text) - 1][0])
 	bot.send_message(message.chat.id, 'Сообщение успешно удалено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
+	time.sleep(2)
 
 ######################################################################################
 # del chanel function
@@ -148,11 +148,11 @@ def del_link(call):
 		time.sleep(1)
 		bot.send_message(call.message.chat.id, "Список пуст", reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))		
 def confirm_del_link(message): 
-	time.sleep(2)
 	global crutch
 	crutch = True
 	base.Sqlopen().deleter('chanel', 'chanels_id', base.Sqlopen().returner('chanel')[int(message.text) - 1][0])
 	bot.send_message(message.chat.id, 'Сообщение успешно удалено', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
+	time.sleep(2)
 
 
 ###########################################################################################
@@ -179,6 +179,7 @@ def send():
 				time.sleep(2)
 		for i in range(sleep_time):
 			global crutch
+			print(crutch)
 			if crutch == True:
 				break
 			else:
