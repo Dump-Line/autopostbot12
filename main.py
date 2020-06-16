@@ -24,9 +24,12 @@ def sender():
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
-				r = bot.send_message(chat_id=i[0], text = f"Заказы АВРОРА КРЫМ\n{x[0]}\nВзять заказ Жми ссылку @Elena_Mercedes_Vito")
-				message_dict[r.message_id] = r.chat.id
-				time.sleep(1)
+				try:
+					r = bot.send_message(chat_id=i[0], text = f"Заказы АВРОРА КРЫМ\n{x[0]}\nВзять заказ Жми ссылку @Elena_Mercedes_Vito")
+					message_dict[r.message_id] = r.chat.id
+					time.sleep(1)
+				except:
+					continue
 		for i in range(sleep_time):
 			global crutch
 			if crutch == True:
