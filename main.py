@@ -44,7 +44,7 @@ def sender():
 				bot.delete_message(i[1], i[0])
 				time.sleep(1)
 			except:
-				bot.send_message(767101864, f'Сообщение не удалилось в {i[1]}')
+				print(message_dict)
 				continue
 		time.sleep(2)
 rT = threading.Thread(target = sender)
