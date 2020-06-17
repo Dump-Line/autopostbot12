@@ -25,7 +25,7 @@ def sender():
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
 				try:
-					r = bot.send_message(chat_id=i[0], text = f"<b>Заказы АВРОРА КРЫМ</b>\n{x[0]}\n<b>Взять заказ Жми ссылку</b> @Elena_Mercedes_Vito")
+					r = bot.send_message(chat_id=i[0], text = f"<b>Заказы АВРОРА КРЫМ</b>\n{x[0]}\n<b>Взять заказ Жми ссылку</b> @Elena_Mercedes_Vito", parse_mode='HTML')
 					message_dict[r.message_id] = r.chat.id
 					time.sleep(1)
 				except:
