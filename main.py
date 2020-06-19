@@ -48,7 +48,7 @@ def sender():
 			for x in base.Sqlopen().returner('data'):
 				try:
 					r = bot.send_message(chat_id = i[0], text = f"<b>Заказы АВРОРА КРЫМ</b>\n{x[0]}\n<b>Взять заказ Жми ссылку</b>" + ' ' + '<a href="https://t.me/Elena_Mercedes_Vito">Elena_Mercedes_Vito</a>', parse_mode='HTML', disable_web_page_preview=True)
-					base.Sqlopen('sender.db').add_chanell('admins', r.message_id)
+					base.Sqlopen().add_chanell('admins', r.message_id)
 					message_dict[r.message_id] = r.chat.id
 					time.sleep(1)
 				except:
