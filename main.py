@@ -18,14 +18,37 @@ TOKEN = config.token
 bot = telebot.TeleBot(config.token)
 server = Flask(__name__)
 
+del_list = []
+
+for i in base.Sqlopen().returner('admins'):
+	del_list.append(i)
+count = 0
+for i in base.Sqlopen().returner('chanel'):
+	try:
+		bot.delete_message(i, del_list[count])
+		count += 1
+	except:
+		continue
+
+	time.sleep(1)
+for i in base.Sqlopen().returner('admins'):
+	try:
+		base.Sqlopen().deleter('admins', 'id', i[0])
+	except:
+		continue
+
+
+
 def sender():
 	time.sleep(5)
 	while 1:
+		del_list = []
 		message_dict = {}
 		for i in base.Sqlopen().returner('chanel'):
 			for x in base.Sqlopen().returner('data'):
 				try:
 					r = bot.send_message(chat_id = i[0], text = f"<b>Заказы АВРОРА КРЫМ</b>\n{x[0]}\n<b>Взять заказ Жми ссылку</b>" + ' ' + '<a href="https://t.me/Elena_Mercedes_Vito">Elena_Mercedes_Vito</a>', parse_mode='HTML', disable_web_page_preview=True)
+					base.Sqlopen('sender.db').add_chanell('admins', r.message_id)
 					message_dict[r.message_id] = r.chat.id
 					time.sleep(1)
 				except:
@@ -39,12 +62,11 @@ def sender():
 		crutch = False
 		time.sleep(1)
 		for i in message_dict.items():
-			print(i)
 			try:
 				bot.delete_message(i[1], i[0])
+				base.Sqlopen().deleter('admins', 'id', i[0])
 				time.sleep(1)
 			except:
-				print(message_dict)
 				continue
 		time.sleep(2)
 rT = threading.Thread(target = sender)
