@@ -127,10 +127,6 @@ def add_chanell(call):
 
 
 def confirm_chanell(message):    
-	for i in base.Sqlopen().returner('data'):
-		if message.text == i[0]:
-			bot.send_message(message.chat.id, 'Канал уже в списке', reply_markup=create_inlineKeyboard({"Вернуться в Админ панель":"cancel"}))
-			return ''
 	global crutch
 	crutch = True
 	base.Sqlopen().add_chanell('chanel', message.text)
