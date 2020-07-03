@@ -1,2 +1,2 @@
-token = '951539767:AAEGxCmJWX9Wo60MF9hYiupT6KucXQx6pKc' # Ваш токен
+token = '951539767:AAHf3MW5QnLo_t8HPNH1C3sH5qhyPfbV9sg' # Ваш токен
 # 
